@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Prediction Node</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div id="app-container">
+        
+        <!-- Hero Section -->
+        <section id="hero" class="active">
+            <div class="hero-content">
+                <div class="icon-pulse">
+                    <i class="fa-solid fa-cloud-bolt"></i>
+                </div>
+                <h1>Weather Prediction Node</h1>
+                <p>AI Based Weather Forecasting Dashboard</p>
+                <button id="get-started-btn" class="glass-btn">
+                    <span>Get Started</span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+            <!-- Animated background elements -->
+            <div class="bg-elements">
+                <div class="cloud cloud-1"><i class="fa-solid fa-cloud"></i></div>
+                <div class="cloud cloud-2"><i class="fa-solid fa-cloud"></i></div>
+                <div class="cloud cloud-3"><i class="fa-solid fa-cloud"></i></div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="hidden">
+            
+            <header class="dashboard-header">
+                <div class="logo">
+                    <i class="fa-solid fa-cloud-bolt"></i> Weather Node
+                </div>
+                <div class="search-container">
+                    <input type="text" id="city-search" placeholder="Search city...">
+                    <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button id="auto-detect-btn" title="Auto Detect Location"><i class="fa-solid fa-location-crosshairs"></i></button>
+                </div>
+                <div class="theme-toggle">
+                    <button id="toggle-theme"><i class="fa-solid fa-moon"></i></button>
+                </div>
+            </header>
+
+            <main class="dashboard-grid">
+                
+                <!-- Left Large Panel -->
+                <div class="left-panel">
+                    <!-- Current Weather Card -->
+                    <div class="card current-weather glass-card">
+                        <div class="weather-main-info">
+                            <div class="location-details">
+                                <h2 id="current-location">Loading...</h2>
+                                <p id="current-date">Today</p>
+                            </div>
+                            <div class="temp-display">
+                                <h1 id="current-temp">--°</h1>
+                                <div class="weather-condition">
+                                    <i id="current-icon" class="fa-solid fa-sun weather-icon-large"></i>
+                                    <span id="current-condition">--</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="condition-text" id="condition-text">Fetching weather data...</p>
+                        
+                        <div class="weather-stats-grid">
+                            <div class="stat-item">
+                                <i class="fa-solid fa-droplet"></i>
+                                <div class="stat-info">
+                                    <span class="label">Humidity</span>
+                                    <span class="value" id="humidity-val">--%</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fa-solid fa-wind"></i>
+                                <div class="stat-info">
+                                    <span class="label">Wind Speed</span>
+                                    <span class="value" id="wind-val">-- km/h</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fa-solid fa-gauge-high"></i>
+                                <div class="stat-info">
+                                    <span class="label">Pressure</span>
+                                    <span class="value" id="pressure-val">-- hPa</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fa-solid fa-sun"></i>
+                                <div class="stat-info">
+                                    <span class="label">UV Index</span>
+                                    <span class="value" id="uv-val">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Prediction Card -->
+                    <div class="card ai-prediction glass-card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-microchip"></i> AI Weather Prediction</h3>
+                            <span class="badge">Live</span>
+                        </div>
+                        <div class="prediction-grid">
+                            <div class="prediction-item hot">
+                                <span>Hot Weather</span>
+                                <div class="progress-bar"><div class="fill" id="prob-hot"></div></div>
+                                <span class="prob-val" id="val-hot">--%</span>
+                            </div>
+                            <div class="prediction-item rain">
+                                <span>Rainy Weather</span>
+                                <div class="progress-bar"><div class="fill" id="prob-rain"></div></div>
+                                <span class="prob-val" id="val-rain">--%</span>
+                            </div>
+                            <div class="prediction-item cloud">
+                                <span>Cloudy Weather</span>
+                                <div class="progress-bar"><div class="fill" id="prob-cloud"></div></div>
+                                <span class="prob-val" id="val-cloud">--%</span>
+                            </div>
+                            <div class="prediction-item storm">
+                                <span>Storm Possibility</span>
+                                <div class="progress-bar"><div class="fill" id="prob-storm"></div></div>
+                                <span class="prob-val" id="val-storm">--%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hourly Forecast Chart -->
+                    <div class="card chart-card glass-card">
+                        <h3>Hourly Forecast</h3>
+                        <div class="chart-container">
+                            <canvas id="hourlyChart"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Sidebar Panel -->
+                <div class="right-panel">
+                    
+                    <!-- Sun events -->
+                    <div class="card sun-card glass-card">
+                        <h3>Sun & Moon</h3>
+                        <div class="sun-times">
+                            <div class="sun-item">
+                                <i class="fa-solid fa-sunrise" style="color: #FFD166;"></i>
+                                <div>
+                                    <span class="label">Sunrise</span>
+                                    <span class="value" id="sunrise-val">--:-- AM</span>
+                                </div>
+                            </div>
+                            <div class="sun-item">
+                                <i class="fa-solid fa-sunset" style="color: #EF476F;"></i>
+                                <div>
+                                    <span class="label">Sunset</span>
+                                    <span class="value" id="sunset-val">--:-- PM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5-Day Forecast -->
+                    <div class="card forecast-card glass-card">
+                        <h3>5-Day Forecast</h3>
+                        <div class="forecast-list" id="forecast-list">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+
+                </div>
+
+            </main>
+        </section>
+
+        <!-- Loading Overlay -->
+        <div id="loader" class="hidden">
+            <div class="spinner"></div>
+            <p>Analyzing Atmospheric Data...</p>
+        </div>
+
+    </div>
+
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

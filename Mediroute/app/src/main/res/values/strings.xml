@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">MediRoute</string>
+
+    <!-- 🔑 GOOGLE MAPS API KEY -->
+    <string name="google_maps_key">AIzaSyBxVU982cTNZuWZtZYMtSqPnrAPoP_-TIY</string>
+
+    <!-- LOGIN -->
+    <string name="login_title">Emergency Medical Assistance</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="login_btn">Login</string>
+    <string name="register_btn">Create Account</string>
+
+    <!-- NAV -->
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- TITLES -->
+    <string name="title_dashboard">Emergency Dashboard</string>
+    <string name="title_profile">User Profile</string>
+
+    <!-- 🚑 EMERGENCIES -->
+    <string name="heart_attack">Heart Attack</string>
+    <string name="stroke">Stroke</string>
+    <string name="breathing_problem">Breathing Problem</string>
+    <string name="severe_bleeding">Severe Bleeding</string>
+    <string name="accident_trauma">Accident / Trauma</string>
+    <string name="burns">Burns</string>
+    <string name="electric_shock">Electric Shock</string>
+    <string name="poisoning">Poisoning</string>
+    <string name="unconscious_person">Unconscious Person</string>
+    <string name="high_fever">High Fever</string>
+
+    <!-- 🩺 INSTRUCTIONS -->
+    <string name="ins_heart_attack">1. Keep patient calm and seated.\n2. Loosen tight clothes.\n3. Give aspirin (if available and not allergic).</string>
+
+    <string name="ins_stroke">1. Remember FAST: Face drooping, Arm weakness, Speech difficulty, Time to call ambulance.\n2. Keep them calm.</string>
+
+    <string name="ins_breathing_problem">1. Sit them upright.\n2. Loosen tight clothing.\n3. Use inhaler if they have one.</string>
+
+    <string name="ins_severe_bleeding">1. Apply firm, direct pressure with a clean cloth.\n2. Elevate the wounded area if possible.</string>
+
+    <string name="ins_accident_trauma">1. Do not move the person unless in immediate danger.\n2. Stop any severe bleeding.</string>
+
+    <string name="ins_burns">1. Cool the burn under cool running water for 10-15 mins.\n2. Do NOT apply ice or ointments.\n3. Cover with a clean cloth.</string>
+
+    <string name="ins_electric_shock">1. DO NOT touch the person if they are still connected to power.\n2. Turn off the power source.\n3. Check breathing and start CPR if needed.</string>
+
+    <string name="ins_poisoning">1. Find out what was swallowed.\n2. Do NOT induce vomiting unless told by a professional.</string>
+
+    <string name="ins_unconscious_person">1. Check if breathing.\n2. If breathing, roll to their side.\n3. If not breathing, start CPR.</string>
+
+    <string name="ins_high_fever">1. Remove excess clothing.\n2. Sponge with lukewarm water.\n3. Keep hydrated.</string>
+
+</resources>
